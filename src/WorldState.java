@@ -100,7 +100,6 @@ public class WorldState implements Comparable<WorldState> {
         return rval.trim();
     }
 
-    // TODO: once a word is completed the letters need to fall, how tf do we handle this?
     public LinkedList<WorldState> getLegalMoves(LinkedList<String> dict) {
         LinkedList<WorldState> moves = new LinkedList<>();
 
