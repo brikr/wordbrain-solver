@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordBrainSolver {
     public static void main(String[] args) {
@@ -29,11 +30,30 @@ public class WordBrainSolver {
         LinkedList<String> dict = new LinkedList<>();
         initializeDict(dict, args[0]);
 
+        System.out.println("Optimizing dictionary. Old size: " + dict.size());
+        // filter out by length initially to speed up program
+        dict = dict.stream().filter(s -> {
+            // remove all words from dictionary that will not appear in puzzle
+            // more optimizations can be performed, but there will be a diminishing return on runtime
+            for(int i = 0; i < wordLengths.length; i++) {
+                if(s.length() == wordLengths[i]) {
+                    for(int r = 0; r < grid.length; r++) {
+                        for(int c = 0; c < grid[0].length; c++) {
+                            if(s.contains("" + grid[r][c])) return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }).collect(Collectors.toCollection(LinkedList::new));
+        System.out.println("Dictionary optimized. New size: " + dict.size());
+
         Stack<WorldState> stack = new Stack<>();
         WorldState initialState = new WorldState(grid, wordLengths);
         stack.push(initialState);
         int solutions, searched;
         solutions = searched = 0;
+        long startTime = System.currentTimeMillis();
         while (!stack.isEmpty()) {
             WorldState state = stack.pop();
             searched++;
@@ -45,7 +65,7 @@ public class WordBrainSolver {
             } else stack.addAll(moves);
         }
 
-        System.out.println("Searched " + searched + " states. " + solutions + " possible solutions found");
+        System.out.printf("Searched %d states. %d possible solutions found in %.1f seconds.\n", searched, solutions, (System.currentTimeMillis() - startTime) / 1000.0);
     }
 
     private static void initializeDict(LinkedList<String> dict, String filename) {

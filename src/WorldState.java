@@ -138,8 +138,7 @@ public class WorldState implements Comparable<WorldState> {
                         // if any word in the dictionary matches what we have so far, add it to future moves
                         // this should (hopefully) cut out on a lot of states
                         String w = next.getWord(i);
-                        int length = next.getWordLengths()[i];
-                        if (dict.stream().anyMatch(s -> s.length() == length && s.startsWith(w))) {
+                        if (dict.stream().anyMatch(s -> s.startsWith(w))) {
                             // if we just completed a word
                             if (next.getWord(i).length() == next.getWordLengths()[i]) {
                                 // simulate tile dropping
