@@ -35,11 +35,11 @@ public class WordBrainSolver {
         dict = dict.stream().filter(s -> {
             // remove all words from dictionary that will not appear in puzzle
             // more optimizations can be performed, but there will be a diminishing return on runtime
-            for(int i = 0; i < wordLengths.length; i++) {
-                if(s.length() == wordLengths[i]) {
-                    for(int r = 0; r < grid.length; r++) {
-                        for(int c = 0; c < grid[0].length; c++) {
-                            if(s.contains("" + grid[r][c])) return true;
+            for (int i = 0; i < wordLengths.length; i++) {
+                if (s.length() == wordLengths[i]) {
+                    for (int r = 0; r < grid.length; r++) {
+                        for (int c = 0; c < grid[0].length; c++) {
+                            if (s.contains("" + grid[r][c])) return true;
                         }
                     }
                 }
