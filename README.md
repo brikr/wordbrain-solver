@@ -20,7 +20,7 @@ tongue mirror crow
 tongue mirror crow
 Searched 1104 states. 2 possible solutions found
 ```
-Note that two identical solutions were output; this is due to the fact that there is more than one way to trace the words for this solution.
+Note that two identical solutions were output; this is due to the fact that there is more than one way to trace the words for this solution.  
 A dictionary file, `wordlist.txt`, is included in the repository. If you have a smaller dictionary, the program will run faster (although it may not find every solution).
 Happy solving!
 
