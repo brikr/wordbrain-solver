@@ -1,5 +1,6 @@
 #WordBrain Solver
 This program is intended to solve puzzles for the popular mobile game, WordBrain ([Android](https://play.google.com/store/apps/details?id=se.maginteractive.wordbrain&hl=en) | [iOS](https://itunes.apple.com/us/app/wordbrain/id708600202?mt=8)). It solves them using a depth-first search with some dictionary pruning, meaning it should be able to solve any puzzle (i.e. it solves puzzles; it does not look up solutions).
+
 ##Usage
 The usage for the program is as follows:
 ```bash
@@ -24,3 +25,11 @@ Note that two identical solutions were printed; this is due to the fact that the
 A dictionary file, `wordlist.txt`, is included in the repository. If you have a smaller dictionary, the program will run faster (although it may not find every solution).  
 Happy solving!
 
+##Empty Squares
+If you're playing a [similar game](https://itunes.apple.com/us/app/wordbubbles!/id922488002) that sometimes has incomplete grids, you can use the `_` symbol to denote spaces that are blank.
+For example, your grid might look like this:
+```
+l p f
+a u e
+y _ d
+```

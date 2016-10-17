@@ -127,7 +127,8 @@ public class WorldState implements Comparable<WorldState> {
                         if (r == 0 && c == 0) continue; // already here
                         if (this.curRow + r >= this.grid.length || this.curRow + r < 0) continue; // out of bounds
                         if (this.curCol + c >= this.grid[0].length || this.curCol + c < 0) continue; // out of bounds
-                        if (this.marked[this.curRow + r][this.curCol + c]) continue; // already been here
+                        if (this.marked[this.curRow + r][this.curCol + c]) continue; // already been here)
+                        if (this.grid[this.curRow + r][this.curCol + c] == '_') continue; // blank space
 
                         // make the path move
                         WorldState next = new WorldState(this);
