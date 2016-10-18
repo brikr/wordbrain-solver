@@ -27,6 +27,9 @@ public class WordBrainSolver {
             grid[i / gridSize][i % gridSize] = scan.next().toLowerCase().charAt(0); // fill in each letter in the grid
         }
 
+        System.out.println("Gravity? [y/n]");
+        boolean gravity = scan.next().toLowerCase().startsWith("y");
+
         LinkedList<String> dict = new LinkedList<>();
         initializeDict(dict, args[0]);
 
@@ -49,7 +52,7 @@ public class WordBrainSolver {
         System.out.println("Dictionary optimized. New size: " + dict.size());
 
         Stack<WorldState> stack = new Stack<>();
-        WorldState initialState = new WorldState(grid, wordLengths);
+        WorldState initialState = new WorldState(grid, wordLengths, gravity);
         stack.push(initialState);
         int solutions, searched;
         solutions = searched = 0;

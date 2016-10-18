@@ -8,9 +8,11 @@ public class WorldState implements Comparable<WorldState> {
     private String[] words;
     int curRow; // current position in path we are making with word
     int curCol; // if we finish a word, this will be -1 (time to start a new word or be done)
+    boolean gravity;
 
-    public WorldState(char[][] grid, int[] wordLengths) {
+    public WorldState(char[][] grid, int[] wordLengths, boolean gravity) {
         this.grid = grid;
+        this.gravity = gravity;
 
         this.marked = new boolean[this.grid.length][this.grid[0].length];
         for (boolean[] row : this.marked) {
@@ -40,6 +42,8 @@ public class WorldState implements Comparable<WorldState> {
 
         this.curRow = ws.curRow;
         this.curCol = ws.curCol;
+
+        this.gravity = ws.gravity;
     }
 
     public char[][] getGrid() {
@@ -128,7 +132,9 @@ public class WorldState implements Comparable<WorldState> {
                         if (this.curRow + r >= this.grid.length || this.curRow + r < 0) continue; // out of bounds
                         if (this.curCol + c >= this.grid[0].length || this.curCol + c < 0) continue; // out of bounds
                         if (this.marked[this.curRow + r][this.curCol + c]) continue; // already been here)
-                        if (this.grid[this.curRow + r][this.curCol + c] == '_') continue; // blank space
+                        if (this.grid[this.curRow + r][this.curCol + c] == '_') {
+                            continue; // blank space
+                        }
 
                         // make the path move
                         WorldState next = new WorldState(this);
@@ -140,7 +146,7 @@ public class WorldState implements Comparable<WorldState> {
                         String w = next.getWord(i);
                         if (dict.stream().anyMatch(s -> s.startsWith(w))) {
                             // if we just completed a word
-                            if (next.getWord(i).length() == next.getWordLengths()[i]) {
+                            if (this.gravity && next.getWord(i).length() == next.getWordLengths()[i]) {
                                 // simulate tile dropping
                                 boolean changed;
                                 char[][] nextGrid = next.getGrid();

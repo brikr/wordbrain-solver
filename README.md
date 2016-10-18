@@ -17,6 +17,8 @@ r c o u
 o w g e
 m r t n
 i r o r
+Gravity? [y/n]
+y
 tongue mirror crow
 tongue mirror crow
 Searched 1104 states. 2 possible solutions found
